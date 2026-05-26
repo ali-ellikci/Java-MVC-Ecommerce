@@ -1,0 +1,678 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* ============================================================
+   CSS DEĞIŞKENLERI (Design Tokens)
+   ============================================================ */
+:root {
+    --primary:        #6366f1;
+    --primary-dark:   #4f46e5;
+    --primary-light:  #e0e7ff;
+    --secondary:      #f59e0b;
+    --success:        #10b981;
+    --danger:         #ef4444;
+    --warning:        #f59e0b;
+    --info:           #3b82f6;
+
+    --bg:             #0f0f1a;
+    --bg-card:        #1a1a2e;
+    --bg-card2:       #16213e;
+    --border:         rgba(255,255,255,0.08);
+
+    --text:           #f1f5f9;
+    --text-muted:     #94a3b8;
+    --text-dark:      #cbd5e1;
+
+    --radius:         14px;
+    --radius-sm:      8px;
+    --shadow:         0 4px 32px rgba(0,0,0,0.4);
+    --shadow-hover:   0 8px 48px rgba(99,102,241,0.3);
+
+    --transition:     all 0.25s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+a { color: var(--primary); text-decoration: none; transition: var(--transition); }
+a:hover { color: var(--primary-dark); }
+
+img { max-width: 100%; }
+
+/* ============================================================
+   NAVBAR
+   ============================================================ */
+.navbar {
+    background: rgba(26, 26, 46, 0.95);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 0.75rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #6366f1, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.navbar-nav .nav-link {
+    color: var(--text-muted) !important;
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 0.5rem 0.9rem !important;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+    color: var(--text) !important;
+    background: rgba(99,102,241,0.15);
+}
+
+.navbar-toggler {
+    border: 1px solid var(--border);
+    color: var(--text);
+}
+
+/* Sepet ikonu */
+.cart-badge {
+    background: var(--primary);
+    color: white;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 99px;
+    margin-left: 4px;
+    vertical-align: top;
+}
+
+/* ============================================================
+   HERO & BANNER
+   ============================================================ */
+.hero {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    padding: 5rem 0 4rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+}
+
+.hero h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    background: linear-gradient(135deg, #fff 0%, #a78bfa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+}
+
+/* Arama kutusu */
+.search-box {
+    max-width: 540px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.search-box input {
+    flex: 1;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: var(--radius);
+    padding: 0.75rem 1.25rem;
+    font-size: 0.95rem;
+    transition: var(--transition);
+}
+
+.search-box input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: rgba(99,102,241,0.08);
+    box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
+}
+
+.search-box input::placeholder { color: var(--text-muted); }
+
+/* ============================================================
+   KATEGORİ FİLTRE
+   ============================================================ */
+.category-filter {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-card);
+}
+
+.category-filter .container {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.cat-btn {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 0.4rem 1rem;
+    border-radius: 99px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: var(--transition);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.cat-btn:hover,
+.cat-btn.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+}
+
+/* ============================================================
+   ÜRÜN KARTLARI
+   ============================================================ */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 1.5rem;
+    padding: 2.5rem 0;
+}
+
+.product-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
+    border-color: rgba(99,102,241,0.4);
+}
+
+.product-card__img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    background: var(--bg-card2);
+    transition: var(--transition);
+}
+
+.product-card:hover .product-card__img {
+    transform: scale(1.04);
+}
+
+.product-card__img-wrap {
+    overflow: hidden;
+    position: relative;
+}
+
+.out-of-stock-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(239,68,68,0.9);
+    color: white;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 99px;
+    backdrop-filter: blur(4px);
+}
+
+.product-card__body {
+    padding: 1.25rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card__category {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--primary);
+    margin-bottom: 0.4rem;
+}
+
+.product-card__name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+}
+
+.product-card__desc {
+    font-size: 0.83rem;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.product-card__price {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+.product-card__actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* ============================================================
+   BUTONLAR
+   ============================================================ */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.55rem 1.25rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+}
+.btn-primary:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(99,102,241,0.4); color: white; }
+
+.btn-outline {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+}
+.btn-outline:hover { border-color: var(--primary); color: var(--primary); background: rgba(99,102,241,0.08); }
+
+.btn-success  { background: var(--success); color: white; }
+.btn-success:hover { opacity: 0.9; color: white; }
+
+.btn-danger   { background: var(--danger); color: white; }
+.btn-danger:hover { opacity: 0.9; color: white; }
+
+.btn-warning  { background: var(--secondary); color: #1a1a2e; }
+.btn-warning:hover { opacity: 0.9; color: #1a1a2e; }
+
+.btn-sm { padding: 0.35rem 0.85rem; font-size: 0.8rem; }
+.btn-lg { padding: 0.8rem 2rem; font-size: 1rem; }
+.btn-full { width: 100%; justify-content: center; }
+.btn:disabled, .btn[disabled] { opacity: 0.5; cursor: not-allowed; transform: none !important; }
+
+/* ============================================================
+   FORM ELEMANLARI
+   ============================================================ */
+.form-group { margin-bottom: 1.25rem; }
+
+.form-label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: 0.4rem;
+}
+
+.form-control {
+    width: 100%;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    padding: 0.65rem 1rem;
+    font-size: 0.9rem;
+    transition: var(--transition);
+    font-family: inherit;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: rgba(99,102,241,0.06);
+    box-shadow: 0 0 0 3px rgba(99,102,241,0.12);
+}
+
+.form-control::placeholder { color: var(--text-muted); opacity: 0.7; }
+
+select.form-control { appearance: none; cursor: pointer; }
+
+textarea.form-control { resize: vertical; min-height: 100px; }
+
+.form-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem;
+    max-width: 520px;
+    margin: 3rem auto;
+}
+
+.form-card h2 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin-bottom: 0.4rem;
+}
+
+.form-card p { color: var(--text-muted); margin-bottom: 2rem; font-size: 0.9rem; }
+
+/* ============================================================
+   ALERT / MESAJ
+   ============================================================ */
+.alert {
+    padding: 0.85rem 1.25rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.alert-danger  { background: rgba(239,68,68,0.12);  border: 1px solid rgba(239,68,68,0.3);  color: #fca5a5; }
+.alert-success { background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.3); color: #6ee7b7; }
+.alert-info    { background: rgba(59,130,246,0.12); border: 1px solid rgba(59,130,246,0.3); color: #93c5fd; }
+.alert-warning { background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.3); color: #fcd34d; }
+
+/* ============================================================
+   SEPET
+   ============================================================ */
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+}
+
+.cart-table th {
+    background: rgba(255,255,255,0.04);
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+}
+
+.cart-table td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+    color: var(--text);
+    font-size: 0.9rem;
+}
+
+.cart-table tr:last-child td { border-bottom: none; }
+
+.cart-img {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    background: var(--bg-card2);
+}
+
+.qty-input {
+    width: 70px;
+    text-align: center;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    padding: 0.3rem 0.5rem;
+    font-size: 0.9rem;
+}
+
+.cart-summary {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+}
+
+.cart-total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+}
+
+.cart-total-row:last-child {
+    border-bottom: none;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text);
+    padding-top: 1rem;
+}
+
+/* ============================================================
+   ÜRÜN DETAY
+   ============================================================ */
+.product-detail {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    padding: 3rem 0;
+    align-items: start;
+}
+
+.product-detail__img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+}
+
+.product-detail__info h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+}
+
+.product-detail__price {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin: 1rem 0;
+}
+
+.product-detail__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.meta-badge {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    padding: 0.3rem 0.85rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.meta-badge.stock-ok  { border-color: rgba(16,185,129,0.4); color: #6ee7b7; background: rgba(16,185,129,0.1); }
+.meta-badge.stock-out { border-color: rgba(239,68,68,0.4);  color: #fca5a5; background: rgba(239,68,68,0.1);  }
+
+/* ============================================================
+   SİPARİŞ DURUM BADGE'LERİ
+   ============================================================ */
+.status-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 99px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+.status-beklemede    { background: rgba(245,158,11,0.15); color: #fcd34d; border: 1px solid rgba(245,158,11,0.3); }
+.status-hazirlaniyor { background: rgba(59,130,246,0.15); color: #93c5fd; border: 1px solid rgba(59,130,246,0.3); }
+.status-kargo        { background: rgba(168,85,247,0.15); color: #d8b4fe; border: 1px solid rgba(168,85,247,0.3); }
+.status-tamamlandi   { background: rgba(16,185,129,0.15); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.3); }
+.status-iptal        { background: rgba(239,68,68,0.15);  color: #fca5a5; border: 1px solid rgba(239,68,68,0.3); }
+
+/* ============================================================
+   SAYFA BAŞLIGI
+   ============================================================ */
+.page-header {
+    padding: 2rem 0 1rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2rem;
+}
+
+.page-header h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+}
+
+.page-header p { color: var(--text-muted); margin-top: 0.25rem; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+    background: var(--bg-card);
+    border-top: 1px solid var(--border);
+    padding: 2rem 0;
+    margin-top: 5rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+/* ============================================================
+   TABLE (siparişler vs)
+   ============================================================ */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table th {
+    background: rgba(99,102,241,0.08);
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+}
+
+.data-table td {
+    padding: 0.9rem 1rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.875rem;
+    color: var(--text);
+    vertical-align: middle;
+}
+
+.data-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+.table-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+
+/* ============================================================
+   EMPTY STATE
+   ============================================================ */
+.empty-state {
+    text-align: center;
+    padding: 5rem 1rem;
+    color: var(--text-muted);
+}
+
+.empty-state .icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.empty-state h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+    .product-detail { grid-template-columns: 1fr; gap: 1.5rem; }
+    .products-grid  { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+    .cart-table { font-size: 0.8rem; }
+    .form-card { margin: 1.5rem 1rem; padding: 1.5rem; }
+}
+
+/* ============================================================
+   YARDIMCI SINIFLAR
+   ============================================================ */
+.container   { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+.section     { padding: 2.5rem 0; }
+.text-muted  { color: var(--text-muted) !important; }
+.text-primary { color: var(--primary) !important; }
+.fw-bold     { font-weight: 700; }
+.mt-1 { margin-top: 0.25rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-3 { margin-top: 1rem; }
+.mt-4 { margin-top: 1.5rem; }
+.mt-5 { margin-top: 3rem; }
+.mb-1 { margin-bottom: 0.25rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 1rem; }
+.mb-4 { margin-bottom: 1.5rem; }
+.d-flex  { display: flex; }
+.align-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.gap-1 { gap: 0.5rem; }
+.gap-2 { gap: 1rem; }
+.gap-3 { gap: 1.5rem; }
+.w-100 { width: 100%; }
