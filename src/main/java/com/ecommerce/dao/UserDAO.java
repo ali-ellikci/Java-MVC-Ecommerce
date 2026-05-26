@@ -84,6 +84,28 @@ public class UserDAO {
         }
     }
 
+    /** Kullanıcının şifresini günceller (verilen email ile) */
+    public void updatePassword(String email, String hashedPassword) throws SQLException {
+        String sql = "UPDATE users SET password = ? WHERE email = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, hashedPassword);
+            ps.setString(2, email);
+            ps.executeUpdate();
+        }
+    }
+
+    /** Kullanıcının rolünü günceller (verilen email ile) */
+    public void updateRole(String email, String role) throws SQLException {
+        String sql = "UPDATE users SET role = ? WHERE email = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, role);
+            ps.setString(2, email);
+            ps.executeUpdate();
+        }
+    }
+
     // ResultSet → User
     private User mapRow(ResultSet rs) throws SQLException {
         User u = new User();

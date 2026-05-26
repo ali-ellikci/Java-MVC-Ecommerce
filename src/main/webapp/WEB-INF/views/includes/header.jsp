@@ -16,7 +16,7 @@
 <nav class="navbar">
   <div class="container d-flex align-center justify-between">
 
-    <a href="${pageContext.request.contextPath}/home" class="navbar-brand">🛍 ShopZone</a>
+    <a href="${pageContext.request.contextPath}/home" class="navbar-brand"> Ana Sayfa</a>
 
     <div class="d-flex align-center gap-2" style="flex-wrap:wrap;">
 
@@ -35,6 +35,13 @@
 
       <!-- Sağ menü -->
       <div class="d-flex align-center gap-1">
+        <!-- Admin Paneli - Sadece Admin Giriş Yapmışsa -->
+        <c:if test="${not empty sessionScope.adminUser or (not empty sessionScope.loggedUser and sessionScope.loggedUser.role == 'admin')}">
+          <a href="${pageContext.request.contextPath}/admin/dashboard" class="navbar-nav nav-link" title="Admin Panel">
+            🔐 Admin
+          </a>
+        </c:if>
+
         <!-- Sepet -->
         <a href="${pageContext.request.contextPath}/cart" class="navbar-nav nav-link">
           🛒
@@ -45,13 +52,19 @@
 
         <!-- Kullanıcı -->
         <c:choose>
+          <c:when test="${not empty sessionScope.adminUser or (not empty sessionScope.loggedUser and sessionScope.loggedUser.role == 'admin')}">
+            <!-- Admin çıkış -->
+            <a href="${pageContext.request.contextPath}/admin/logout" class="btn btn-outline btn-sm">Çıkış</a>
+          </c:when>
           <c:when test="${not empty sessionScope.loggedUser}">
+            <!-- Normal müşteri -->
             <a href="${pageContext.request.contextPath}/my-orders" class="navbar-nav nav-link">
               👤 <c:out value="${sessionScope.loggedUser.fullName}"/>
             </a>
             <a href="${pageContext.request.contextPath}/logout" class="btn btn-outline btn-sm">Çıkış</a>
           </c:when>
           <c:otherwise>
+            <!-- Kimse giriş yapmamış -->
             <a href="${pageContext.request.contextPath}/login"    class="navbar-nav nav-link">Giriş</a>
             <a href="${pageContext.request.contextPath}/register" class="btn btn-primary btn-sm">Kayıt Ol</a>
           </c:otherwise>

@@ -28,10 +28,7 @@
               <tr>
                 <td><strong>#${order.id}</strong></td>
                 <td>
-                  <fmt:formatDate value="${order.orderDate}" pattern="dd.MM.yyyy HH:mm"
-                    type="both"/><%-- LocalDateTime → JSP için String dönüşümü Java'da yapılacak --%>
-                  <%-- LocalDateTime için JSTL fmt kısıtlı; String formatı kullanıyoruz --%>
-                  ${order.orderDate != null ? order.orderDate.toString().replace('T', ' ').substring(0,16) : '-'}
+                  <c:out value="${order.orderDateFormatted}"/>
                 </td>
                 <td>
                   <fmt:formatNumber value="${order.totalAmount}" type="number"

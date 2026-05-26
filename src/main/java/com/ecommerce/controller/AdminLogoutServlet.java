@@ -11,8 +11,8 @@ public class AdminLogoutServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = req.getSession(false);
         if (session != null) {
-            session.removeAttribute("adminUser");
+            session.invalidate();
         }
-        resp.sendRedirect(req.getContextPath() + "/admin/login");
+        resp.sendRedirect(req.getContextPath() + "/");
     }
 }

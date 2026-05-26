@@ -82,7 +82,7 @@
             <div style="margin-bottom: 1rem;">
               <span class="admin-label">Sipariş Tarihi</span>
               <div style="font-size: 0.9rem; margin-top: 2px;">
-                ${order.orderDate != null ? order.orderDate.toString().replace('T', ' ').substring(0,16) : '-'}
+                <c:out value="${order.orderDateFormatted}"/>
               </div>
             </div>
 

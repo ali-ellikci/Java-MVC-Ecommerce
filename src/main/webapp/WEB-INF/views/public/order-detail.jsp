@@ -18,7 +18,7 @@
       <div class="page-header d-flex justify-between align-center">
         <div>
           <h1>Sipariş #${order.id}</h1>
-          <p>${order.orderDate != null ? order.orderDate.toString().replace('T', ' ').substring(0,16) : '-'}</p>
+          <p><c:out value="${order.orderDateFormatted}"/></p>
         </div>
         <c:choose>
           <c:when test="${order.status == 'Beklemede'}">

@@ -3,7 +3,7 @@
 <%-- Admin Sidebar Include --%>
 <aside class="admin-sidebar">
   <div class="sidebar-brand">
-    <div class="sidebar-brand-text">🛍 ShopZone</div>
+    <div class="sidebar-brand-text">🛍 Admin</div>
     <div class="sidebar-brand-sub">Admin Panel</div>
   </div>
 
@@ -33,7 +33,7 @@
     </a>
 
     <div class="sidebar-section-title">Mağaza</div>
-    <a href="${pageContext.request.contextPath}/home" class="sidebar-link" target="_blank">
+    <a href="${pageContext.request.contextPath}/home" class="sidebar-link">
       <span class="icon">🌐</span> Mağazayı Gör
     </a>
   </nav>

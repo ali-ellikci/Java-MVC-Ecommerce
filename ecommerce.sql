@@ -52,11 +52,6 @@ CREATE TABLE IF NOT EXISTS order_items (
 );
 
 
--- Admin kullanıcı (şifre: admin123 )
-INSERT INTO users (full_name, email, password, phone, address, role) VALUES
-('Admin Kullanıcı', 'admin@admin.com', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', '05001234567', 'İstanbul, Türkiye', 'admin')
-ON CONFLICT (email) DO NOTHING;
-
 -- Test müşteri (şifre: test123 → BCrypt hash)
 INSERT INTO users (full_name, email, password, phone, address, role) VALUES
 ('Test Kullanıcı', 'test@test.com', '$2a$10$8K1p/a0dR1xqM8K3Qe6MKuQwZ5J7oXRtGvN2bsP4cL6fH9Yd3mIwe', '05559876543', 'Ankara, Türkiye', 'customer')

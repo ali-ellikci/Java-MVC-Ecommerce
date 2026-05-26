@@ -52,7 +52,7 @@
               <td style="color:var(--admin-muted);"><strong>#${order.id}</strong></td>
               <td><strong><c:out value="${order.customerName}"/></strong></td>
               <td>
-                ${order.orderDate != null ? order.orderDate.toString().replace('T', ' ').substring(0,16) : '-'}
+                <c:out value="${order.orderDateFormatted}"/>
               </td>
               <td>
                 <fmt:formatNumber value="${order.totalAmount}" type="number" minFractionDigits="2" maxFractionDigits="2"/> ₺

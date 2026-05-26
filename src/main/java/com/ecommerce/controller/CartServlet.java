@@ -10,10 +10,6 @@ import java.math.BigDecimal;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/**
- * Sepet işlemleri: görüntüle, ekle, çıkar, güncelle.
- * Sepet session'da Map<Integer, CartItem> olarak tutulur.
- */
 public class CartServlet extends HttpServlet {
 
     private final ProductDAO productDAO = new ProductDAO();
